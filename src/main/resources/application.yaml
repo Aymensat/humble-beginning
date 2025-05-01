@@ -1,3 +1,7 @@
+jwt:
+  secret: yourSecretKey
+  expiration: 86400000
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
@@ -12,3 +16,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  logging:
+    level:
+      org.springframework.boot: DEBUG
+
+

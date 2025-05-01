@@ -1,5 +1,6 @@
 package com.aymen_yassine.first_site.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -10,12 +11,12 @@ public class Announcement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "student_group_id")
     private StudentGroup studentGroup;
@@ -25,6 +26,8 @@ public class Announcement {
     private LocalDateTime targetedDate;
 
 
+    @Enumerated(EnumType.STRING)
+    private AppEnums.AnnouncementTypeEnum type;
 
     @Enumerated(EnumType.STRING)
     private AppEnums.AnnouncementStateEnum state;
@@ -37,6 +40,21 @@ public class Announcement {
     private String administratorComment;
 
     private LocalDateTime createdAt;
+
+    public Announcement(Teacher teacher, StudentGroup studentGroup, LocalDateTime targetedDate,
+                        AppEnums.AnnouncementTypeEnum type, AppEnums.AnnouncementStateEnum state,
+                        String studentComment, String administratorComment, LocalDateTime createdAt) {
+
+            this.teacher = teacher;
+            this.studentGroup = studentGroup;
+            this.targetedDate = targetedDate;
+            this.type = type;
+            this.state = state;
+            this.studentComment = studentComment;
+            this.administratorComment = administratorComment;
+            this.createdAt = createdAt;
+    }
+
 
     public StudentGroup getStudentGroup() {
         return studentGroup;
@@ -80,6 +98,14 @@ public class Announcement {
 
     public AppEnums.AnnouncementStateEnum getState() {
         return state;
+    }
+
+    public AppEnums.AnnouncementTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(AppEnums.AnnouncementTypeEnum type) {
+        this.type = type;
     }
 
     public void setState(AppEnums.AnnouncementStateEnum state) {

@@ -4,8 +4,8 @@ package com.aymen_yassine.first_site.controller;
 import com.aymen_yassine.first_site.DTO.TimetableDTO;
 import com.aymen_yassine.first_site.entity.AppEnums;
 import com.aymen_yassine.first_site.service.TimeTableResolver;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,19 +13,21 @@ import java.util.List;
 
 
 @RestController
-public class FirstController {
+public class TableController {
 
     private TimeTableResolver timeTableResolver;
 
-    public FirstController(TimeTableResolver timeTableResolver) {
+    public TableController(TimeTableResolver timeTableResolver) {
         this.timeTableResolver = timeTableResolver;
     }
 
+
     @GetMapping("/hello")
     public String hello() {
-        return "Hello Worlllld";
+        return "Hello WAWA";
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/timetable")
     public List<TimetableDTO> getTimetable(
             @RequestParam(value = "class-year", required = false) AppEnums.ClassYearEnum classYear,

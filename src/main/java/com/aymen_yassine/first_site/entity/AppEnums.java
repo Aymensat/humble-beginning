@@ -21,6 +21,10 @@ public class AppEnums {
         a, b, c, d
     }
 
+    public enum AnnouncementTypeEnum {
+        absence , catchup
+    }
+
     public enum AnnouncementStateEnum {
         pending, approved, rejected
     }
