@@ -17,6 +17,7 @@ public record AnnouncementDTOForAdmins(
         AppEnums.ClassLetterEnum classLetter,
 
         LocalDateTime targetedDate,
+        String weekday ,
 
         AppEnums.AnnouncementTypeEnum type,
         AppEnums.AnnouncementStateEnum state,

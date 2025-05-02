@@ -12,7 +12,10 @@ import com.aymen_yassine.first_site.repository.StudentGroupRepository;
 import com.aymen_yassine.first_site.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 
 @Service
@@ -30,15 +33,20 @@ public class AnnouncementMapper {
 
     public AnnouncementDTOForStudents toAnnouncementDTOForStudents (Announcement announcement ) {
 
+
         if (announcement == null) return null;
 
-        AnnouncementDTOForStudents announcementDTOForStudents = new AnnouncementDTOForStudents(
+        LocalDateTime date = announcement.getTargetedDate();
+        String weekday = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
 
+
+        AnnouncementDTOForStudents announcementDTOForStudents = new AnnouncementDTOForStudents(
 
                 announcement.getTeacher().getFullName(),
                 announcement.getTeacher().getEmail(),
                 announcement.getType(),
                 announcement.getTargetedDate() ,
+                weekday,
                 announcement.getStudentComment()
 
         );
@@ -49,6 +57,10 @@ public class AnnouncementMapper {
     public AnnouncementDTOForAdmins toAnnouncementDTOForAdmins (Announcement announcement ) {
 
         if (announcement == null) return null;
+
+        LocalDateTime date = announcement.getTargetedDate();
+        String weekday = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+
 
         AnnouncementDTOForAdmins announcementDTOForAdmins = new AnnouncementDTOForAdmins(
 
@@ -63,6 +75,7 @@ public class AnnouncementMapper {
                 announcement.getStudentGroup().getClassLetter(),
 
                 announcement.getTargetedDate(),
+                weekday ,
 
                 announcement.getType(),
                 announcement.getState(),

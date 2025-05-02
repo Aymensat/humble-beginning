@@ -16,7 +16,7 @@ public record AnnouncementDTOForStudents(
         AppEnums.AnnouncementTypeEnum type,
 
         LocalDateTime targetedDate,
-
+        String weekday ,
 
         String studentComment  )
 {}
