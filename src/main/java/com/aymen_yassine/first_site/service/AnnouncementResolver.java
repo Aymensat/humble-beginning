@@ -1,9 +1,6 @@
 package com.aymen_yassine.first_site.service;
 
-import com.aymen_yassine.first_site.DTO.AnnouncementDTOForAdmins;
-import com.aymen_yassine.first_site.DTO.AnnouncementDTOForStudents;
-import com.aymen_yassine.first_site.DTO.AnnouncementDTOForTeachers;
-import com.aymen_yassine.first_site.DTO.TimetableDTO;
+import com.aymen_yassine.first_site.DTO.*;
 import com.aymen_yassine.first_site.entity.Announcement;
 import com.aymen_yassine.first_site.entity.Teacher;
 import com.aymen_yassine.first_site.repository.AnnouncementRepository;
@@ -79,6 +76,36 @@ public class AnnouncementResolver {
         Announcement announcement = announcementMapper.toAnnouncement(announcementDTOForTeachers, teacher);
 
         // Save and return
+        return announcementRepository.save(announcement);
+    }
+
+
+    /**
+     * Updates the status of an announcement
+     *
+     * @param id The ID of the announcement to update
+     * @param updateData The data containing the new status and optional administrator comment
+     * @return The updated announcement
+     * @throws ResponseStatusException if the announcement is not found
+     */
+    public Announcement updateAnnouncementStatus(Integer id, AnnouncementUpdateDTO updateData) {
+        // Find announcement by ID
+        Optional<Announcement> announcementOptional = announcementRepository.findById(id);
+        if (!announcementOptional.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Announcement not found with id: " + id);
+        }
+
+        Announcement announcement = announcementOptional.get();
+
+        // Update the announcement state
+        announcement.setState(updateData.getState());
+
+        // Update administrator comment if provided
+        if (updateData.getAdministratorComment() != null && !updateData.getAdministratorComment().trim().isEmpty()) {
+            announcement.setAdministratorComment(updateData.getAdministratorComment());
+        }
+
+        // Save and return updated announcement
         return announcementRepository.save(announcement);
     }
 

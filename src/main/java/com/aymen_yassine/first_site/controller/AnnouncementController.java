@@ -3,8 +3,10 @@ package com.aymen_yassine.first_site.controller;
 import com.aymen_yassine.first_site.DTO.AnnouncementDTOForAdmins;
 import com.aymen_yassine.first_site.DTO.AnnouncementDTOForStudents;
 import com.aymen_yassine.first_site.DTO.AnnouncementDTOForTeachers;
+import com.aymen_yassine.first_site.DTO.AnnouncementUpdateDTO;
 import com.aymen_yassine.first_site.entity.Announcement;
 import com.aymen_yassine.first_site.service.AnnouncementResolver;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +48,23 @@ public class AnnouncementController {
     public List<AnnouncementDTOForAdmins> getAllAnnouncement(){
 
         return announcementResolver.giveAllForAdmin();
+    }
+
+    /**
+     * Updates the status of an announcement
+     *
+     * @param id The ID of the announcement to update
+     * @param updateData The update data including state and optional comment
+     * @return The updated announcement
+     */
+    @CrossOrigin(origins = "*")
+    @PutMapping("/administration/announcement/{id}")
+    public ResponseEntity<Announcement> updateAnnouncementStatus(
+            @PathVariable Integer id,
+            @RequestBody AnnouncementUpdateDTO updateData) {
+
+        Announcement updatedAnnouncement = announcementResolver.updateAnnouncementStatus(id, updateData);
+        return ResponseEntity.ok(updatedAnnouncement);
     }
 
 
