@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
     void findAllById(Integer teacherId);
 
-    Optional<Object> findByEmail(String username);
+    Optional<Teacher> findByEmail(String username);
 }

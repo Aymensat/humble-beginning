@@ -10,4 +10,7 @@ public interface TimetableRepository extends JpaRepository<Timetable, Integer> {
 
      List<Timetable> findByStudentGroupClassYearAndStudentGroupFieldAndStudentGroupClassLetter(
              AppEnums.ClassYearEnum studentGroup_classYear, AppEnums.FieldEnum studentGroup_field, AppEnums.ClassLetterEnum studentGroup_classLetter);
+
+
+     List<Timetable> findAllByTeacherId(Integer teacherId);
 }

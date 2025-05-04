@@ -11,6 +11,7 @@ import java.util.List;
 
 
 //approved ones for students
+@CrossOrigin(origins = "*")
 @RestController
 public class AnnouncementController {
 
@@ -20,11 +21,17 @@ public class AnnouncementController {
         this.announcementResolver = announcementResolver;
     }
 
+//    @CrossOrigin(origins = "*")
+//    @PostMapping("/teacher")
+//    public Announcement sendAnnouncement(@RequestBody AnnouncementDTOForTeachers announcementDTOForTeachers) {
+//
+//        return this.announcementResolver.sendAnnouncement(announcementDTOForTeachers);
+//    }
+
     @CrossOrigin(origins = "*")
     @PostMapping("/teacher")
-    public Announcement sendAnnouncement(@RequestBody AnnouncementDTOForTeachers announcementDTOForTeachers) {
-
-        return this.announcementResolver.sendAnnouncement(announcementDTOForTeachers);
+    public Announcement sendAnnouncement(@RequestBody AnnouncementDTOForTeachers announcementDTO) {
+        return this.announcementResolver.sendAnnouncement(announcementDTO);
     }
 
     @CrossOrigin(origins = "*")

@@ -37,7 +37,7 @@ public class AnnouncementMapper {
         if (announcement == null) return null;
 
         LocalDateTime date = announcement.getTargetedDate();
-        String weekday = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        String weekday = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH).toLowerCase();
 
 
         AnnouncementDTOForStudents announcementDTOForStudents = new AnnouncementDTOForStudents(
@@ -59,7 +59,7 @@ public class AnnouncementMapper {
         if (announcement == null) return null;
 
         LocalDateTime date = announcement.getTargetedDate();
-        String weekday = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        String weekday = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH).toLowerCase();
 
 
         AnnouncementDTOForAdmins announcementDTOForAdmins = new AnnouncementDTOForAdmins(
@@ -101,7 +101,7 @@ public class AnnouncementMapper {
 
         Announcement announcement = new Announcement(
 
-//baildha bil classe id
+//remplace with perheps from secutiy context
                 teacherRepository.findById(1).orElse(null) ,
 
                 studentGroup ,
@@ -117,11 +117,31 @@ public class AnnouncementMapper {
 
                 LocalDateTime.now()
 
-
-
         );
 
     return announcement;
     }
+
+
+
+    public Announcement toAnnouncement(AnnouncementDTOForTeachers dto, Teacher teacher) {
+        if (dto == null || teacher == null) return null;
+
+        StudentGroup studentGroup = (StudentGroup) studentGroupRepository.findByClassYearAndFieldAndClassLetter(
+                dto.classYear(), dto.field(), dto.classLetter()
+        );
+
+        return new Announcement(
+                teacher,
+                studentGroup,
+                dto.targetedDate(),
+                dto.type(),
+                AppEnums.AnnouncementStateEnum.pending,
+                dto.studentComment(),
+                dto.administratorComment(),
+                LocalDateTime.now()
+        );
+    }
+
 
 }
