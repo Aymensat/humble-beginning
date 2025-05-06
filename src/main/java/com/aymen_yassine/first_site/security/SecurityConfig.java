@@ -1,4 +1,4 @@
-package com.aymen_yassine.first_site;
+package com.aymen_yassine.first_site.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

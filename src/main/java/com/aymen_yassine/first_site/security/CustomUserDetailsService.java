@@ -1,4 +1,4 @@
-package com.aymen_yassine.first_site;
+package com.aymen_yassine.first_site.security;
 
 import com.aymen_yassine.first_site.entity.Teacher;
 import com.aymen_yassine.first_site.repository.TeacherRepository;

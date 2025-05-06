@@ -1,5 +1,6 @@
-package com.aymen_yassine.first_site;
+package com.aymen_yassine.first_site.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+
+@Slf4j
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/auth")
@@ -26,6 +29,8 @@ public class AuthController {
         this.userDetailsService = userDetailsService;
         this.jwtUtil = jwtUtil;
     }
+
+
     @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authRequest) {
@@ -44,6 +49,7 @@ public class AuthController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails);
 
+        log.info("User  Athentication Token: " + jwt);
         return ResponseEntity.ok(new AuthResponse(jwt));
     }
 

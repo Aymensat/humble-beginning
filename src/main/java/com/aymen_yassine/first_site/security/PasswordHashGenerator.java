@@ -1,3 +1,5 @@
+package com.aymen_yassine.first_site.security;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordHashGenerator {

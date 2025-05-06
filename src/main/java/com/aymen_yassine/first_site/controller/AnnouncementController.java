@@ -6,6 +6,7 @@ import com.aymen_yassine.first_site.DTO.AnnouncementDTOForTeachers;
 import com.aymen_yassine.first_site.DTO.AnnouncementUpdateDTO;
 import com.aymen_yassine.first_site.entity.Announcement;
 import com.aymen_yassine.first_site.service.AnnouncementResolver;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 
 //approved ones for students
+@Slf4j
 @CrossOrigin(origins = "*")
 @RestController
 public class AnnouncementController {
@@ -32,7 +34,9 @@ public class AnnouncementController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/teacher")
+
     public Announcement sendAnnouncement(@RequestBody AnnouncementDTOForTeachers announcementDTO) {
+        log.info("announcement sent well ");
         return this.announcementResolver.sendAnnouncement(announcementDTO);
     }
 

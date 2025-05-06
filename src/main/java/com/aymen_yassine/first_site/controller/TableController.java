@@ -6,16 +6,20 @@ import com.aymen_yassine.first_site.entity.AppEnums;
 import com.aymen_yassine.first_site.repository.TimetableRepository;
 import com.aymen_yassine.first_site.service.TimeTableResolver;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.logging.Logger;
 
-
+@Slf4j
 @RestController
 public class TableController {
+
 
     private final TimetableRepository timetableRepository;
     private TimeTableResolver timeTableResolver;
@@ -25,10 +29,10 @@ public class TableController {
         this.timetableRepository = timetableRepository;
     }
 
-
     @GetMapping("/hello")
+
     public String hello() {
-        return "Hello WAWA";
+        log.info("Handling /hello request"); return "Hello WAWA";
     }
 
     @CrossOrigin(origins = "*")

@@ -1,8 +1,7 @@
-package com.aymen_yassine.first_site;
+package com.aymen_yassine.first_site.security;
 
 
 import io.jsonwebtoken.*;
-
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
